@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from 'vue';
+import { reactive, ref, watch } from 'vue';
 // 导入图标，配合prefix-icon属性使用
 import { Lock, User } from '@element-plus/icons-vue';
 // 定义响应式表单数据
@@ -16,12 +16,27 @@ const rules = reactive({
         { required: true, message: '请输入密码', trigger: 'blur' },
     ],
 })
+let loginButtonDisabled = ref(true)
+// 使用watch监听username和password的输入情况
+// 方式一：对监听每一个表单字段，并且对每一个表单字段做判断，当表单数据非常多时
+// watch([() => loginInfo.username, () => loginInfo.password], (newValue, oldValue)=>{
+//     loginButtonDisabled.value = ( newValue[0] === '' && newValue[1] === '')
+// })
+// 方式二：监听表单数据对象，并且对表单的校验结果做判断(推荐使用)
+const loginFormRef = ref()
+watch(loginInfo, ()=>{
+    loginFormRef.value.validate((valid) => {
+        // valid为组件的校验结果
+        loginButtonDisabled.value = !valid
+    })
+})
 </script>
 <template>
     <el-card class="box-card">
         <h3>后台管理系统</h3>
         <!-- rules:绑定校验规则，status-icon:校验不通过显示反馈图标 -->
-        <el-form :model="loginInfo" class="login-form" :rules="rules" status-icon>
+        <!-- 添加ref属性，用于给组件注册一个引用信息 -->
+        <el-form ref="loginFormRef" :model="loginInfo" class="login-form" :rules="rules" status-icon>
             <!-- prop：配合rules实现表单校验，名称需与rules中保持一致 -->
             <el-form-item prop="username">
                 <!-- prefix-icon：在输入框前添加图标，clearable：是否显示清除按钮 -->
@@ -33,7 +48,7 @@ const rules = reactive({
                     :prefix-icon="Lock" show-password />
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="submitForm(ruleFormRef)">登录</el-button>
+                <el-button type="primary" :disabled="loginButtonDisabled" @click="submitForm(ruleFormRef)">登录</el-button>
             </el-form-item>
         </el-form>
     </el-card>
