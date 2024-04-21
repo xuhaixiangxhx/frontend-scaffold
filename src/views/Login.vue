@@ -4,6 +4,8 @@ import { reactive, ref, watch } from 'vue';
 import { Lock, User } from '@element-plus/icons-vue';
 // 导入axios
 import axios from 'axios';
+// 导入消息提示
+import { ElMessage } from 'element-plus';
 // 定义响应式表单数据
 const loginInfo = reactive({
     username: '',
@@ -39,7 +41,15 @@ const submitForm = () => {
         url: 'http://127.0.0.1:4523/m1/3963245-0-default/api/auth/login',
         data: loginInfo
     }).then((response) => {
-        console.log(response.data)
+        console.log('登录response: ', response.data)
+        if (response.data.status == 200) {
+            const token = response.data.data.token
+            window.localStorage.setItem('Authorization', token)
+            ElMessage({
+                message: '登录成功.',
+                type: 'success',
+            })
+        }
     }).catch((error) => {
         console.log(error)
     })
