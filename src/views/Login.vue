@@ -2,6 +2,8 @@
 import { reactive, ref, watch } from 'vue';
 // 导入图标，配合prefix-icon属性使用
 import { Lock, User } from '@element-plus/icons-vue';
+// 导入axios
+import axios from 'axios';
 // 定义响应式表单数据
 const loginInfo = reactive({
     username: '',
@@ -24,12 +26,24 @@ let loginButtonDisabled = ref(true)
 // })
 // 方式二：监听表单数据对象，并且对表单的校验结果做判断(推荐使用)
 const loginFormRef = ref()
-watch(loginInfo, ()=>{
+watch(loginInfo, () => {
     loginFormRef.value.validate((valid) => {
         // valid为组件的校验结果
         loginButtonDisabled.value = !valid
     })
 })
+// 登录调用后台
+const submitForm = () => {
+    axios({
+        method: 'post',
+        url: 'http://127.0.0.1:4523/m1/3963245-0-default/api/auth/login',
+        data: loginInfo
+    }).then((response) => {
+        console.log(response.data)
+    }).catch((error) => {
+        console.log(error)
+    })
+}
 </script>
 <template>
     <el-card class="box-card">
@@ -48,7 +62,7 @@ watch(loginInfo, ()=>{
                     :prefix-icon="Lock" show-password />
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" :disabled="loginButtonDisabled" @click="submitForm(ruleFormRef)">登录</el-button>
+                <el-button type="primary" :disabled="loginButtonDisabled" @click="submitForm()">登录</el-button>
             </el-form-item>
         </el-form>
     </el-card>
