@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import { CONFIG } from '../config'
 
 const subRoutes = {}
 
@@ -34,7 +35,7 @@ router.beforeEach(
         // 判断访问路径是否为/login
         const isLoginPath = targetPath.indexOf('/login')
         // 获取token
-        const token = localStorage.getItem('Authorization')
+        const token = localStorage.getItem(CONFIG.TOKEN_NAME)
         if(isLoginPath == 0 && token != null ){
             // 登录页面，且携带token
             next('/')

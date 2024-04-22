@@ -2,8 +2,8 @@
 import { reactive, ref, watch } from 'vue';
 // 导入图标，配合prefix-icon属性使用
 import { Lock, User } from '@element-plus/icons-vue';
-// 导入http
-import http from '../api/index.js';
+// 导入login
+import { login } from '../api/auth.js';
 // 导入消息提示
 import { ElMessage } from 'element-plus';
 // 导入路由
@@ -36,14 +36,11 @@ watch(loginInfo, () => {
         loginButtonDisabled.value = !valid
     })
 })
+// 创建一个router
 const router = useRouter()
 // 登录调用后台
 const submitForm = () => {
-    http({
-        method: 'post',
-        url: 'http://127.0.0.1:4523/m1/3963245-0-default/api/auth/login',
-        data: loginInfo
-    }).then((response) => {
+    login(loginInfo.username, loginInfo.password).then((response) => {
         console.log('登录response: ', response.data)
         if (response.data.status == 200) {
             const token = response.data.data.token
@@ -52,6 +49,7 @@ const submitForm = () => {
                 message: '登录成功.',
                 type: 'success',
             })
+            // 登录成功, 跳转到首页
             router.replace('/')
         }
     })

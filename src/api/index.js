@@ -5,17 +5,18 @@
     3. 可以自定义拦截器
 */
 import axios from 'axios'
+import { API_CONFIG, CONFIG } from '../config/index.js'
 import router from '../router/index.js'
 const http = axios.create({
-    baseURL: '',
+    baseURL: API_CONFIG.baseUrl,
     timeout: 5000,
 })
 
 http.interceptors.request.use(
     (config) => {
         // 获取token，添加到请求头
-        const token = window.localStorage.getItem('Authorization')
-        config.headers['Authorization'] = token
+        const token = window.localStorage.getItem(CONFIG.TOKEN_NAME)
+        config.headers[CONFIG.TOKEN_NAME] = token
         // 解决缓存问题
         if (config.method == 'get') {
             let timeStamp = (new Date()).getTime()
@@ -40,7 +41,7 @@ http.interceptors.response.use(
         // token失效
         if (response.data.status == 401) {
             // 移除本地存储的无效令牌
-            window.localStorage.removeItem('Authorization')
+            window.localStorage.removeItem(CONFIG.TOKEN_NAME)
             // 跳转到登录页
             router.currentRoute.value.path != '/login' && router.replace('/login') 
         }
