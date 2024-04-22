@@ -3,7 +3,7 @@ import { reactive, ref, watch } from 'vue';
 // 导入图标，配合prefix-icon属性使用
 import { Lock, User } from '@element-plus/icons-vue';
 // 导入axios
-import axios from 'axios';
+import http from '../api/index.js';
 // 导入消息提示
 import { ElMessage } from 'element-plus';
 // 定义响应式表单数据
@@ -36,7 +36,7 @@ watch(loginInfo, () => {
 })
 // 登录调用后台
 const submitForm = () => {
-    axios({
+    http({
         method: 'post',
         url: 'http://127.0.0.1:4523/m1/3963245-0-default/api/auth/login',
         data: loginInfo
@@ -50,8 +50,6 @@ const submitForm = () => {
                 type: 'success',
             })
         }
-    }).catch((error) => {
-        console.log(error)
     })
 }
 </script>
