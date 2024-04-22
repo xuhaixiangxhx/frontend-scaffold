@@ -2,10 +2,12 @@
 import { reactive, ref, watch } from 'vue';
 // 导入图标，配合prefix-icon属性使用
 import { Lock, User } from '@element-plus/icons-vue';
-// 导入axios
+// 导入http
 import http from '../api/index.js';
 // 导入消息提示
 import { ElMessage } from 'element-plus';
+// 导入路由
+import { useRouter } from 'vue-router';
 // 定义响应式表单数据
 const loginInfo = reactive({
     username: '',
@@ -34,6 +36,7 @@ watch(loginInfo, () => {
         loginButtonDisabled.value = !valid
     })
 })
+const router = useRouter()
 // 登录调用后台
 const submitForm = () => {
     http({
@@ -49,6 +52,7 @@ const submitForm = () => {
                 message: '登录成功.',
                 type: 'success',
             })
+            router.replace('/')
         }
     })
 }
