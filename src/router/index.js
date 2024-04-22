@@ -6,7 +6,7 @@ const subRoutes = {}
 const routes = [
     {
         path: '/',
-        component: () => import('../views/Index.vue')
+        component: () => import('../views/layout/Layout.vue')
     },
     {
         path: '/login',
