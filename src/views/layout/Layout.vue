@@ -19,4 +19,12 @@ import Main from './components/Main.vue';
   </template>
 
 <style scoped>
+.el-container {
+  height: 100vh;
+  width: 100vw;
+}
+.el-container .el-container {
+  display: flex;
+  flex-direction: column;
+}
 </style>
