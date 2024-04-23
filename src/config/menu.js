@@ -3,7 +3,7 @@ export const MENU_CONFIG = [
     {
         title: '用户管理',
         index: '/user',
-        icon: '',
+        icon: 'iconfont icon-yonghuguanli',
         items: [
             // 添加用户
             {
@@ -21,13 +21,13 @@ export const MENU_CONFIG = [
     {
         title: '产品管理',
         index: '/product',
-        icon: '',
+        icon: 'iconfont icon-chanpinguanli',
         subMenu: [
             // 电子产品
             {
                 title: '电子产品',
                 index: '/product/eletronic',
-                icons: '',
+                icon: 'iconfont icon-dianzichanpin1-copy',
                 items: [
                     // 添加产品
                     {
@@ -45,7 +45,7 @@ export const MENU_CONFIG = [
             {
                 title: '生鲜产品',
                 index: '/product/fresh',
-                icons: '',
+                icon: 'iconfont icon-ziyuan',
                 items: [
                     // 添加产品
                     {

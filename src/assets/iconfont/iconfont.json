@@ -1,0 +1,44 @@
+{
+  "id": "4521016",
+  "name": "front",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "后台管理",
+  "glyphs": [
+    {
+      "icon_id": "2084825",
+      "name": "产品管理",
+      "font_class": "chanpinguanli",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "4472699",
+      "name": "生鲜",
+      "font_class": "ziyuan",
+      "unicode": "e635",
+      "unicode_decimal": 58933
+    },
+    {
+      "icon_id": "4870977",
+      "name": "电子产品",
+      "font_class": "dianzichanpin1-copy",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "8605760",
+      "name": "用户管理",
+      "font_class": "yonghuguanli",
+      "unicode": "e667",
+      "unicode_decimal": 58983
+    },
+    {
+      "icon_id": "9351379",
+      "name": "订单管理",
+      "font_class": "dingdanguanli",
+      "unicode": "e787",
+      "unicode_decimal": 59271
+    }
+  ]
+}

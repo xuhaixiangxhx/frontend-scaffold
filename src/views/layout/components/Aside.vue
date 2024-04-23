@@ -1,5 +1,6 @@
 <script setup>
 import { Ship } from '@element-plus/icons-vue';
+import '../../../assets/iconfont/iconfont.css';
 import { MENU_CONFIG } from '../../../config/menu.js';
 </script>
 
@@ -15,12 +16,14 @@ import { MENU_CONFIG } from '../../../config/menu.js';
         <el-menu default-active="2" class="el-menu-vertical-demo" router>
             <el-sub-menu v-for="menu in MENU_CONFIG" :key="menu.index" :index="menu.index">
                 <template #title>
+                    <el-icon><span :class="menu.icon"></span></el-icon>
                     <span>{{ menu.title }}</span>
                 </template>                
                 <!-- 判断是否有子菜单 -->
                 <template v-if="menu.subMenu">
                     <el-sub-menu v-for="subMenu in menu.subMenu" :key="subMenu.index" :index="subMenu.index">
                         <template #title>
+                            <el-icon><span :class="subMenu.icon"></span></el-icon>
                             <span>{{ subMenu.title }}</span>
                         </template>
                         <el-menu-item v-for="item in subMenu.items" :key="item.index" :index="item.index">{{ item.title }}</el-menu-item>
