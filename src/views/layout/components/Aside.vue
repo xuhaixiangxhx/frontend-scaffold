@@ -4,9 +4,11 @@ import { Ship } from '@element-plus/icons-vue';
 
 <template>
     <el-aside>
+        <router-link to="/home">
         <div class="aside-logo">
             <el-button text><el-icon><Ship /></el-icon>后台管理</el-button>
         </div>
+        </router-link>
     </el-aside>
 </template>
 
