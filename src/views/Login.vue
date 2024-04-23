@@ -56,34 +56,40 @@ const submitForm = () => {
 }
 </script>
 <template>
-    <el-card class="box-card">
-        <h3>后台管理系统</h3>
-        <!-- rules:绑定校验规则，status-icon:校验不通过显示反馈图标 -->
-        <!-- 添加ref属性，用于给组件注册一个引用信息 -->
-        <el-form ref="loginFormRef" :model="loginInfo" class="login-form" :rules="rules" status-icon>
-            <!-- prop：配合rules实现表单校验，名称需与rules中保持一致 -->
-            <el-form-item prop="username">
-                <!-- prefix-icon：在输入框前添加图标，clearable：是否显示清除按钮 -->
-                <el-input placeholder="请输入用户名" v-model="loginInfo.username" :prefix-icon="User" clearable />
-            </el-form-item>
-            <el-form-item prop="password">
-                <!-- show-password：是否显示切换密码图标 -->
-                <el-input placeholder="请输入密码" v-model="loginInfo.password" type="password" autocomplete="off"
-                    :prefix-icon="Lock" show-password />
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary" :disabled="loginButtonDisabled" @click="submitForm()">登录</el-button>
-            </el-form-item>
-        </el-form>
-    </el-card>
+    <div id="login">
+        <el-card>
+            <h3>后台管理系统</h3>
+            <!-- rules:绑定校验规则，status-icon:校验不通过显示反馈图标 -->
+            <!-- 添加ref属性，用于给组件注册一个引用信息 -->
+            <el-form ref="loginFormRef" :model="loginInfo" :rules="rules" status-icon>
+                <!-- prop：配合rules实现表单校验，名称需与rules中保持一致 -->
+                <el-form-item prop="username">
+                    <!-- prefix-icon：在输入框前添加图标，clearable：是否显示清除按钮 -->
+                    <el-input placeholder="请输入用户名" v-model="loginInfo.username" :prefix-icon="User" clearable />
+                </el-form-item>
+                <el-form-item prop="password">
+                    <!-- show-password：是否显示切换密码图标 -->
+                    <el-input placeholder="请输入密码" v-model="loginInfo.password" type="password" autocomplete="off"
+                        :prefix-icon="Lock" show-password />
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" :disabled="loginButtonDisabled" @click="submitForm()">登录</el-button>
+                </el-form-item>
+            </el-form>
+        </el-card>    
+    </div>
 </template>
 
 <style scoped>
-.box-card {
-    max-width: 480px;
+#login {
+    width: 100vw;
+}
+.el-card {
+    max-width: 300px;
+    margin: 0 auto;
 }
 
-.login-form {
+.el-form {
     max-width: 600px;
 }
 </style>
