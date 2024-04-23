@@ -30,30 +30,6 @@ import { MENU_CONFIG } from '../../../config/menu.js';
                     <el-menu-item v-for="item in menu.items" :key="item.index" :index="item.index">{{ item.title }}</el-menu-item>
                 </template>
             </el-sub-menu>
- 
-            <!-- <el-sub-menu index="/user">
-                <template #title>
-                    <span>用户管理</span>
-                </template>
-                <el-menu-item index="/user/add">用户添加</el-menu-item>
-                <el-menu-item index="/user/edit">用户修改</el-menu-item>
-                <el-menu-item index="/user/query">用户查询</el-menu-item>
-                <el-sub-menu index="/user/priviledge">
-                    <template #title><span>用户权限</span></template>
-                    <el-menu-item index="/user/priviledge/add">权限添加</el-menu-item>
-                    <el-menu-item index="/user/priviledge/query">权限查询</el-menu-item>
-                </el-sub-menu>
-            </el-sub-menu>
-            <el-sub-menu index="/order">
-                <template #title>
-                    <span>订单管理</span>
-                </template>
-                <el-menu-item index="/order/edit">订单修改</el-menu-item>
-                <el-menu-item index="/order/query">订单查询</el-menu-item>
-            </el-sub-menu>
-            <el-menu-item index="/product">
-                <template #title>商品管理</template>
-            </el-menu-item> -->
         </el-menu>
     </el-aside>
 </template>
