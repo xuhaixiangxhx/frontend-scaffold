@@ -23,7 +23,7 @@ http.interceptors.request.use(
             if(config.params){
                 config.params.timeStamp = timeStamp
             } else {
-                config.params.timeStamp = {timeStamp: timeStamp}
+                config.params = {timeStamp: timeStamp}
             }
         }
         return config
@@ -37,7 +37,7 @@ http.interceptors.request.use(
 
 http.interceptors.response.use(
     (response) => {
-        console.log(response)
+        // console.log(response)
         // token失效
         if (response.data.status == 401) {
             // 移除本地存储的无效令牌
