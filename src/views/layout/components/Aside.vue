@@ -13,7 +13,7 @@ import { MENU_CONFIG } from '../../../config/menu.js';
                     </el-icon>后台管理</el-button>
             </div>
         </router-link>
-        <el-menu default-active="2" class="el-menu-vertical-demo" router>
+        <el-menu :default-active="$route.path" class="el-menu-vertical-demo" router>
             <el-sub-menu v-for="menu in MENU_CONFIG" :key="menu.index" :index="menu.index">
                 <template #title>
                     <!-- 使用iconfont -->
