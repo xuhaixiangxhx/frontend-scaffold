@@ -2,10 +2,13 @@
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { onBeforeMount, reactive, ref, toRefs } from 'vue';
 import { delUserHandler, getUserListHandler } from '../../api/user.js';
+import Add from './Add.vue';
 const data = reactive({
     items: []
 })
 const loading = ref(true)
+// 添加用户对话框是否显示
+const addUserDialog = ref(false)
 // 获取用户列表
 const getUserList = () => {
     getUserListHandler().then(
@@ -16,7 +19,6 @@ const getUserList = () => {
         }
     )
 }
-
 // 自动获取用户列表
 onBeforeMount(
     () => {
@@ -58,7 +60,8 @@ const { items } = toRefs(data)
         <template #header>
             <div class="card-header">
                 <span>用户列表</span>
-                <el-button text>添加</el-button>
+                <!-- 点击显示用户添加对话框 -->
+                <el-button text @click="addUserDialog = true ">添加</el-button>
             </div>
         </template>
         <!-- border:添加边框，stripe：斑马纹，height：设置表格高度 -->
@@ -78,7 +81,10 @@ const { items } = toRefs(data)
             </el-table-column>
         </el-table>
     </el-card>
-
+    <!-- 用户添加对话框 -->
+    <el-dialog v-model="addUserDialog" title="用户添加" width="500" center>
+        <Add></Add>
+    </el-dialog>
 </template>
 
 <style scoped>
