@@ -1,7 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import { CONFIG } from '../config'
-
-const subRoutes = {}
+import { CONFIG } from '../config/index.js'
+import userRoutes from './user.js'
 
 const routes = [
     {
@@ -13,7 +12,7 @@ const routes = [
         component: () => import('../views/Login.vue'),
         name: 'login'
     },
-    subRoutes
+    userRoutes
 ]
 
 const router = createRouter({
