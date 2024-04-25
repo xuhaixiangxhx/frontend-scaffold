@@ -17,3 +17,11 @@ export const delUserHandler = (id) => {
         data: {id}
     })
 }
+
+export const addUserHandler = (userForm) => {
+    return http({
+        url: API_CONFIG.addUserApi,
+        method: 'post',
+        data: userForm
+    })
+}

@@ -9,6 +9,13 @@ const data = reactive({
 const loading = ref(true)
 // 添加用户对话框是否显示
 const addUserDialog = ref(false)
+// emit事件回调函数
+const callback = () => {
+    // 关闭对话框
+    addUserDialog.value = false
+    // 刷新用户列表
+    getUserList()
+}
 // 获取用户列表
 const getUserList = () => {
     getUserListHandler().then(
@@ -82,8 +89,9 @@ const { items } = toRefs(data)
         </el-table>
     </el-card>
     <!-- 用户添加对话框 -->
-    <el-dialog v-model="addUserDialog" title="用户添加" width="500" center>
-        <Add></Add>
+    <el-dialog v-model="addUserDialog" title="用户添加" width="360">
+        <!-- 监听事件 -->
+        <Add @close-add-diag="callback"></Add>
     </el-dialog>
 </template>
 
