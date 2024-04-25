@@ -9,3 +9,11 @@ export const getUserListHandler = () => {
         timeout: 2000
     })
 }
+
+export const delUserHandler = (id) => {
+    return http({
+        url: API_CONFIG.deleteUserApi,
+        method: 'post',
+        data: {id}
+    })
+}
