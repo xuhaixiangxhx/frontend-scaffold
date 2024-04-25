@@ -1,16 +1,19 @@
 <script setup>
-import { onBeforeMount, reactive, toRefs } from 'vue';
+import { onBeforeMount, reactive, ref, toRefs } from 'vue';
 import { getUserListHandler } from '../../api/user.js';
 
 const data = reactive({
     items: []
 })
+const loading = ref(true)
 // 自动获取用户列表
 onBeforeMount(
     () => {
         getUserListHandler().then(
             (response) => {
                 data.items = response.data.data.items
+                // 完成数据加载
+                loading.value = false
             }
         )
     }
@@ -20,7 +23,8 @@ const { items } = toRefs(data)
 
 </script>
 <template>
-    <el-card>
+    <!-- 添加数据加载样式 -->
+    <el-card v-loading="loading" element-loading-text="努力加载中">
         <template #header>
         <div class="card-header">
             <span>用户列表</span>
