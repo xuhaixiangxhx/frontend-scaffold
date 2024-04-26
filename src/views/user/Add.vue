@@ -10,6 +10,7 @@ const data = reactive({
     address: ''
   }
 })
+// 从父组件传递数据
 const props = defineProps({
   // 用户操作类型
   operation: {
@@ -39,7 +40,7 @@ const rules = reactive({
 })
 const emit = defineEmits(['closeAddDiag'])
 const clear = () => {
-  // 将数据重设
+  // 将数据重置，这里重置是重置为初始值，不是重置为空
   userFormRef.value.resetFields()
 }
 const submit = () => {
