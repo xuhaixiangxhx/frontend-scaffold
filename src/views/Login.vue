@@ -72,7 +72,7 @@ const submitForm = () => {
                     <el-input placeholder="请输入密码" v-model="loginInfo.password" type="password" autocomplete="off"
                         :prefix-icon="Lock" show-password />
                 </el-form-item>
-                <el-form-item>
+                <el-form-item style="display: block; margin-left: 40%;">
                     <el-button type="primary" :disabled="loginButtonDisabled" @click="submitForm()">登录</el-button>
                 </el-form-item>
             </el-form>
@@ -85,7 +85,7 @@ const submitForm = () => {
     width: 100vw;
 }
 .el-card {
-    max-width: 300px;
+    max-width: 360px;
     margin: 0 auto;
 }
 

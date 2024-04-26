@@ -4,11 +4,30 @@ import { onBeforeMount, reactive, ref, toRefs } from 'vue';
 import { delUserHandler, getUserListHandler } from '../../api/user.js';
 import Add from './Add.vue';
 const data = reactive({
-    items: []
+    items: [],
+    // 向子组件传递userForm对象
+    userForm: {
+        username: '',
+        phone: '',
+        address: ''
+    }
 })
 const loading = ref(true)
 // 添加用户对话框是否显示
 const addUserDialog = ref(false)
+// 向子组件传递数据，是add还是update类型操作
+let operation = ref()
+const addUser = () => {
+    // 向子组件传入空的userForm
+    operation.value = 'add'
+    data.userForm = {}
+    addUserDialog.value = true
+}
+const updateUser = (row) => {
+    operation.value = 'update'
+    data.userForm = row
+    addUserDialog.value = true
+}
 // emit事件回调函数
 const callback = () => {
     // 关闭对话框
@@ -58,7 +77,7 @@ const deleteUser = (row) => {
     })
 }
 
-const { items } = toRefs(data)
+const { items, userForm } = toRefs(data)
 
 </script>
 <template>
@@ -68,7 +87,7 @@ const { items } = toRefs(data)
             <div class="card-header">
                 <span>用户列表</span>
                 <!-- 点击显示用户添加对话框 -->
-                <el-button text @click="addUserDialog = true ">添加</el-button>
+                <el-button text @click="addUser()">添加</el-button>
             </div>
         </template>
         <!-- border:添加边框，stripe：斑马纹，height：设置表格高度 -->
@@ -81,7 +100,7 @@ const { items } = toRefs(data)
             <el-table-column fixed="right" label="用户操作" width="150">
                 <!-- scope包含了当前行的数据以及一些其他信息 -->
                 <template #default="scope">
-                    <el-button link type="primary" size="small">编辑</el-button>
+                    <el-button @click="updateUser(scope.row)" link type="primary" size="small">编辑</el-button>
                     <!-- scope.row同城包含当前行的完整数据对象 -->
                     <el-button @click="deleteUser(scope.row)" link type="warning" size="small">删除</el-button>
                 </template>
@@ -89,9 +108,10 @@ const { items } = toRefs(data)
         </el-table>
     </el-card>
     <!-- 用户添加对话框 -->
-    <el-dialog v-model="addUserDialog" title="用户添加" width="360">
+    <!-- destroy-on-close关闭对话框清除数据 -->
+    <el-dialog destroy-on-close v-model="addUserDialog" :title="operation=='add'?'用户添加':'用户更新'" width="360">
         <!-- 监听事件 -->
-        <Add @close-add-diag="callback"></Add>
+        <Add @close-add-diag="callback" :operation="operation" :user-form="userForm"></Add>
     </el-dialog>
 </template>
 

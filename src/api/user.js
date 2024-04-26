@@ -25,3 +25,11 @@ export const addUserHandler = (userForm) => {
         data: userForm
     })
 }
+
+export const updateUserHandler = (userForm) => {
+    return http({
+        url: API_CONFIG.updateUserApi,
+        method: 'post',
+        data: userForm
+    })
+}
