@@ -1,8 +1,15 @@
 <script setup>
 import { ArrowLeft, ArrowRight, SwitchButton } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 import { CONFIG } from '../../../config/index.js';
+// 从pinia中获取折叠状态 
+import { useCollapseStore } from '../../../store/index.js';
+const { isCollapse } = storeToRefs(useCollapseStore())
+const collapse = () => {
+  useCollapseStore().changeCollapase()
+}
 const router = useRouter()
 const logout = () => {
   ElMessageBox.confirm(
@@ -33,8 +40,8 @@ const logout = () => {
 
 <template>
     <el-header>
-        <el-button>
-            <el-icon><ArrowLeft /></el-icon><el-icon><ArrowRight /></el-icon>
+        <el-button @click="collapse()">
+            <el-icon v-show="!isCollapse"><ArrowLeft /></el-icon><el-icon v-show="isCollapse"><ArrowRight /></el-icon>
         </el-button>
         <el-button @click="logout()">
             <el-icon><SwitchButton /></el-icon>

@@ -1,19 +1,25 @@
 <script setup>
 import { Ship } from '@element-plus/icons-vue';
+import { storeToRefs } from 'pinia';
 import '../../../assets/iconfont/iconfont.css';
 import { MENU_CONFIG } from '../../../config/menu.js';
+// 从pinia中获取折叠状态 
+import { useCollapseStore } from '../../../store/index.js';
+const { isCollapse } = storeToRefs(useCollapseStore())
 </script>
 
 <template>
-    <el-aside>
+    <el-aside :width="isCollapse?'65px':'240px'">
         <router-link to="/home">
-            <div class="aside-logo">
-                <el-button text><el-icon>
-                        <Ship />
-                    </el-icon>后台管理</el-button>
+            <div class="aside-logo" >
+                <el-button text>
+                    <el-icon><Ship /></el-icon>
+                    <span v-show="!isCollapse">后台管理</span>
+                </el-button>
             </div>
         </router-link>
-        <el-menu :default-active="$route.path" class="el-menu-vertical-demo" router>
+        <!-- 关闭默认的折叠动画 -->
+        <el-menu :default-active="$route.path" :collapse="isCollapse" :collapse-transition="false" class="el-menu-vertical" router>
             <el-sub-menu v-for="menu in MENU_CONFIG" :key="menu.index" :index="menu.index">
                 <template #title>
                     <!-- 使用iconfont -->
@@ -45,8 +51,11 @@ import { MENU_CONFIG } from '../../../config/menu.js';
 
 <style scoped>
 .el-aside {
-    width: 240px;
     border-right: 1px solid #cccccc;
+    transition: width 0.2s ease;
+    -webkit-transition: width 0.2s ease;
+    -moz-transition: width 0.2s ease;
+    -o-transition: width 0.2s ease;
 }
 
 .aside-logo {
