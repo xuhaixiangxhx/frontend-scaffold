@@ -5,10 +5,6 @@ const userRoutes = {
         {
             path: 'list',
             component: () => import('../views/user/List.vue')
-        },
-        {
-            path: 'add',
-            component: () => import('../views/user/Add.vue')
         }
     ]
 }

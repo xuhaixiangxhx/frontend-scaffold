@@ -58,7 +58,6 @@ const deleteUser = (row) => {
         {
             confirmButtonText: '确认',
             cancelButtonText: '取消',
-            type: 'warning',
         }
     ).then(() => {
         loading.value = true
